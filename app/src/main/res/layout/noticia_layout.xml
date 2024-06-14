@@ -2,19 +2,112 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:layout_margin="20dp"
+    android:layout_height="wrap_content"
+    android:layout_marginLeft="20dp"
+    android:layout_marginTop="20dp"
+    android:layout_marginRight="20dp"
     android:background="@color/fondo">
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:orientation="vertical">
 
-        <LinearLayout
+        <androidx.cardview.widget.CardView
+            android:id="@+id/CardViewDetalles"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/blanco"
-            android:orientation="horizontal" />
+            app:cardBackgroundColor="@color/blanco"
+            app:cardCornerRadius="20dp"
+            app:cardElevation="0dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:id="@+id/imageViewLugar"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="20dp"
+                    android:adjustViewBounds="true"
+                    app:srcCompat="@drawable/ig_canalpanama1" />
+
+                <TextView
+                    android:id="@+id/textViewTitulo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="-5dp"
+                    android:fontFamily="@font/poppins_semibold"
+                    android:text="Titulo"
+                    android:textColor="@color/negro"
+                    android:textSize="@dimen/titulosNoticias" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginEnd="20dp"
+                    android:layout_marginBottom="15dp"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:id="@+id/imageViewUser"
+                        android:layout_width="35dp"
+                        android:layout_height="match_parent"
+                        android:adjustViewBounds="true"
+                        android:cropToPadding="true"
+                        android:scaleType="fitCenter"
+                        app:srcCompat="@drawable/ic_usuario_andres_martinez" />
+
+                    <TextView
+                        android:id="@+id/textViewAutor"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginStart="5dp"
+                        android:layout_marginEnd="5dp"
+                        android:layout_weight="1"
+                        android:fontFamily="@font/poppins_light"
+                        android:gravity="center_vertical"
+                        android:paddingTop="5dp"
+                        android:text="Autor"
+                        android:textColor="@color/negro"
+                        android:textSize="@dimen/autor_likes" />
+
+                    <ImageView
+                        android:id="@+id/imageViewLikes"
+                        android:layout_width="35dp"
+                        android:layout_height="match_parent"
+                        android:adjustViewBounds="true"
+                        android:background="@drawable/button_selector"
+                        app:srcCompat="@drawable/ic_likes" />
+
+                    <TextView
+                        android:id="@+id/textViewLikes"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="center"
+                        android:layout_marginEnd="10dp"
+                        android:fontFamily="@font/poppins_light"
+                        android:gravity="center_vertical"
+                        android:paddingTop="5dp"
+                        android:text="1000"
+                        android:textColor="@color/negro"
+                        android:textSize="@dimen/autor_likes" />
+
+                    <ImageView
+                        android:id="@+id/imageViewCompartir"
+                        android:layout_width="35dp"
+                        android:layout_height="match_parent"
+                        android:adjustViewBounds="true"
+                        android:background="@drawable/button_selector"
+                        app:srcCompat="@drawable/ic_compartir" />
+                </LinearLayout>
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
