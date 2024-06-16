@@ -2,4 +2,5 @@
 <resources>
     <dimen name="titulosNoticias">24sp</dimen>
     <dimen name="autor_likes">18sp</dimen>
+    <dimen name="tituloToolbar">28sp</dimen>
 </resources>
