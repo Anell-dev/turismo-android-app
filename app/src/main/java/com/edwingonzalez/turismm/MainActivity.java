@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.core.content.ContextCompat;
 
 import com.edwingonzalez.turismm.Adaptadores.NoticiaAdaptador;
+import com.edwingonzalez.turismm.Clases.DetallesUtil;
 import com.edwingonzalez.turismm.Clases.Noticia;
 
 import java.util.ArrayList;
@@ -44,28 +45,36 @@ public class MainActivity extends AppCompatActivity {
         imageButtonSalir = findViewById(R.id.imageButtonSalir);
     }
 
-    //-------------------------------Botones--------------------------------\\
+    //?-------------------------------Botones--------------------------------\\
     private void setClickListeners() {
         imageButtonSalir.setOnClickListener(view -> finishAffinity());
     }
 
-    //-------------------------------Datos--------------------------------\\
+    //?-------------------------------Datos--------------------------------\\
     @SuppressLint("UseCompatLoadingForDrawables")
     private void Datos() {
         recyclerViewNoticia = findViewById(R.id.recyclerViewNoticia);
         ArrayList<Noticia> noticias = new ArrayList<>();
-        noticias.add(new Noticia("Canal de Panamá", "Andrés Martinez", "detalles", 120, getDrawable(R.drawable.ig_canalpanama), getDrawable(R.drawable.ic_andres_martinez)));
-        noticias.add(new Noticia("Casco Antiguo", "Laura González", "detalles", 75, getDrawable(R.drawable.ig_cascoantiguo), getDrawable(R.drawable.ic_laura_gonsalez)));
-        noticias.add(new Noticia("Bocas del Toro", "Fernando Castillo", "detalles", 140, getDrawable(R.drawable.ig_bocasdeltoro), getDrawable(R.drawable.ic_fernando_castillo)));
-        noticias.add(new Noticia("Portobelo", "Carolina Pérez", "detalles", 65, getDrawable(R.drawable.ig_portobelo), getDrawable(R.drawable.ic_carolina_perez)));
-        noticias.add(new Noticia("Isla Coiba", "Juan Rodríguez", "detalles", 210, getDrawable(R.drawable.ig_islacoiba), getDrawable(R.drawable.ic_juan_rodriguez)));
-        noticias.add(new Noticia("Volcán Baru", "Sofía Hernández", "detalles", 90, getDrawable(R.drawable.ig_volcanbaru), getDrawable(R.drawable.ic_sofia_hernandez)));
-        noticias.add(new Noticia("El valle de Anton", "Miguel López", "detalles", 155, getDrawable(R.drawable.ig_valleanton), getDrawable(R.drawable.ic_miguel_lopez)));
-        noticias.add(new Noticia("Isla San Blas", "Valeria Fernández", "detalles", 80, getDrawable(R.drawable.ig_islasanblas), getDrawable(R.drawable.ic_valeria_fernandez)));
-        noticias.add(new Noticia("Museo de la Biodiversidad", "Pablo García", "detalles", 130, getDrawable(R.drawable.ig_museo), getDrawable(R.drawable.ic_pablo_garcia)));
-        noticias.add(new Noticia("Cinta Costera", "Daniela Torres", "detalles", 50, getDrawable(R.drawable.ig_cintacostera), getDrawable(R.drawable.ic_daniela_torres)));
+
+        //?-------------Añadiendo noticias a la lista usando la función auxiliar----------\\
+        addNoticia(noticias, "Canal de Panamá", "Andrés Martinez", DetallesUtil.CANAL_PANAMA, 120, R.drawable.ig_canalpanama, R.drawable.ic_andres_martinez);
+        addNoticia(noticias, "Casco Antiguo", "Laura González", DetallesUtil.CASCO_ANTIGUO, 75, R.drawable.ig_cascoantiguo, R.drawable.ic_laura_gonsalez);
+        addNoticia(noticias, "Bocas del Toro", "Fernando Castillo", DetallesUtil.BOCAS_DEL_TORO, 140, R.drawable.ig_bocasdeltoro, R.drawable.ic_fernando_castillo);
+        addNoticia(noticias, "Portobelo", "Carolina Pérez", DetallesUtil.PORTOBELO, 65, R.drawable.ig_portobelo, R.drawable.ic_carolina_perez);
+        addNoticia(noticias, "Isla Coiba", "Juan Rodríguez", DetallesUtil.ISLA_COIBA, 210, R.drawable.ig_islacoiba, R.drawable.ic_juan_rodriguez);
+        addNoticia(noticias, "Volcán Baru", "Sofía Hernández", DetallesUtil.VOLCAN_BARU, 90, R.drawable.ig_volcanbaru, R.drawable.ic_sofia_hernandez);
+        addNoticia(noticias, "El valle de Anton", "Miguel López", DetallesUtil.VALLE_ANTON, 155, R.drawable.ig_valleanton, R.drawable.ic_miguel_lopez);
+        addNoticia(noticias, "Isla San Blas", "Valeria Fernández", DetallesUtil.ISLA_SAN_BLAS, 80, R.drawable.ig_islasanblas, R.drawable.ic_valeria_fernandez);
+        addNoticia(noticias, "Museo de la Biodiversidad", "Pablo García", DetallesUtil.MUSEO_BIODIVERSIDAD, 130, R.drawable.ig_museo, R.drawable.ic_pablo_garcia);
+        addNoticia(noticias, "Cinta Costera", "Daniela Torres", DetallesUtil.CINTA_COSTERA, 50, R.drawable.ig_cintacostera, R.drawable.ic_daniela_torres);
+
         NoticiaAdaptador noticiaAdaptador = new NoticiaAdaptador(this, noticias);
         recyclerViewNoticia.setLayoutManager(new LinearLayoutManager(this));
         recyclerViewNoticia.setAdapter(noticiaAdaptador);
+    }
+
+    //?---------------Función auxiliar para añadir noticias a la lista-----------------------\\
+    private void addNoticia(ArrayList<Noticia> noticias, String titulo, String autor, String detalles, int likes, int imagenPrincipal, int imagenAutor) {
+        noticias.add(new Noticia(titulo, autor, detalles, likes, getDrawable(imagenPrincipal), getDrawable(imagenAutor)));
     }
 }
