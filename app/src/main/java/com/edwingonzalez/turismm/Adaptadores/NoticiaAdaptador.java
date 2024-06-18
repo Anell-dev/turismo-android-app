@@ -1,6 +1,12 @@
 package com.edwingonzalez.turismm.Adaptadores;
 
 import android.content.Context;
+import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
+import android.net.Uri;
+import android.provider.MediaStore;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -32,6 +38,8 @@ public class NoticiaAdaptador extends RecyclerView.Adapter<NoticiaAdaptador.View
 
     @Override
     public void onBindViewHolder(@NonNull NoticiaAdaptador.ViewHolder holder, int position) {
+
+
         holder.textViewTitulo.setText(lista.get(position).getTitulo());
         holder.textViewAutor.setText(lista.get(position).getAutor());
         holder.textViewLikes.setText(String.valueOf(lista.get(position).getLikes()));
@@ -45,6 +53,28 @@ public class NoticiaAdaptador extends RecyclerView.Adapter<NoticiaAdaptador.View
                 cantidadLikes++;
                 holder.textViewLikes.setText(String.valueOf(cantidadLikes));
             }
+        });
+
+        holder.imageViewLugar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(context, Detalles.class);
+                intent.putExtra("titulo", lista.get(position).getTitulo());
+                intent.putExtra("detalles", lista.get(position).getContenido());
+                context.startActivity(intent);
+            }
+        });
+
+        holder.imageViewCompartir.setOnClickListener(v -> {
+            Drawable drawable = lista.get(position).getImagen();
+            Bitmap bitmap = ((BitmapDrawable) drawable).getBitmap();
+            String path = MediaStore.Images.Media.insertImage(context.getContentResolver(), bitmap, lista.get(position).getTitulo(), null);
+            Uri uri = Uri.parse(path);
+
+            Intent shareIntent = new Intent(Intent.ACTION_SEND);
+            shareIntent.setType("image/jpeg");
+            shareIntent.putExtra(Intent.EXTRA_STREAM, uri);
+            context.startActivity(Intent.createChooser(shareIntent, "Compartir imagen usando"));
         });
     }
 
