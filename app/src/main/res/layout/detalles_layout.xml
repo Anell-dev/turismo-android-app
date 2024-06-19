@@ -140,9 +140,13 @@
                 android:layout_gravity="bottom|end"
                 android:layout_margin="20dp"
                 android:clickable="true"
+                android:focusable="true"
                 app:backgroundTint="@color/blanco"
-                app:maxImageSize="60dp"
-                app:srcCompat="@drawable/ic_web" />
+                app:fabCustomSize="56dp"
+                app:srcCompat="@drawable/ic_web"
+                app:tint="@color/negro"
+                app:maxImageSize="48dp"
+                />
 
         </LinearLayout>
 
