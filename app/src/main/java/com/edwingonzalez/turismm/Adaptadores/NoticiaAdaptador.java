@@ -1,5 +1,6 @@
 package com.edwingonzalez.turismm.Adaptadores;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -37,7 +38,7 @@ public class NoticiaAdaptador extends RecyclerView.Adapter<NoticiaAdaptador.View
     }
 
     @Override
-    public void onBindViewHolder(@NonNull NoticiaAdaptador.ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull NoticiaAdaptador.ViewHolder holder, @SuppressLint("RecyclerView") int position) {
 
 
         holder.textViewTitulo.setText(lista.get(position).getTitulo());
