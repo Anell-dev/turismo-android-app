@@ -17,8 +17,12 @@ import com.edwingonzalez.turismm.*;
 import com.edwingonzalez.turismm.Clases.Noticia;
 
 import androidx.annotation.NonNull;
+import androidx.core.content.FileProvider;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileOutputStream;
 import java.util.ArrayList;
 
 public class NoticiaAdaptador extends RecyclerView.Adapter<NoticiaAdaptador.ViewHolder> {
@@ -39,8 +43,6 @@ public class NoticiaAdaptador extends RecyclerView.Adapter<NoticiaAdaptador.View
 
     @Override
     public void onBindViewHolder(@NonNull NoticiaAdaptador.ViewHolder holder, @SuppressLint("RecyclerView") int position) {
-
-
         holder.textViewTitulo.setText(lista.get(position).getTitulo());
         holder.textViewAutor.setText(lista.get(position).getAutor());
         holder.textViewLikes.setText(String.valueOf(lista.get(position).getLikes()));
@@ -59,10 +61,24 @@ public class NoticiaAdaptador extends RecyclerView.Adapter<NoticiaAdaptador.View
         holder.imageViewLugar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(context, Detalles.class);
-                intent.putExtra("titulo", lista.get(position).getTitulo());
-                intent.putExtra("detalles", lista.get(position).getContenido());
-                context.startActivity(intent);
+                try {
+                    Intent intent = new Intent(context, Detalles.class);
+                    intent.putExtra("titulo", lista.get(position).getTitulo());
+                    intent.putExtra("detalles", lista.get(position).getContenido());
+
+                    Drawable drawable = lista.get(position).getImagen();
+                    Bitmap bitmap = ((BitmapDrawable) drawable).getBitmap();
+                    File tempFile = new File(context.getCacheDir(), "image.png");
+                    FileOutputStream fos = new FileOutputStream(tempFile);
+                    bitmap.compress(Bitmap.CompressFormat.PNG, 100, fos);
+                    fos.close();
+                    Uri imageUri = FileProvider.getUriForFile(context, context.getPackageName() + ".fileprovider", tempFile);
+                    intent.putExtra("imageUri", imageUri.toString());
+
+                    context.startActivity(intent);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
             }
         });
 

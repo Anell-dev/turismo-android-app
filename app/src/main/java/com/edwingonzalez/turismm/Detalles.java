@@ -2,11 +2,13 @@ package com.edwingonzalez.turismm;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.view.View;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -25,6 +27,7 @@ public class Detalles extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.detalles_layout);
+
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
@@ -44,6 +47,19 @@ public class Detalles extends AppCompatActivity {
         //?-------------------Vinculamos y le asignamos el detalle--------------------------\\
         textViewInfoDetalle = findViewById(R.id.textViewInfoDetalle);
         textViewInfoDetalle.setText(getIntent().getExtras().getString("detalles"));
+
+
+        //?-------------------Recibimos la imagen y la mostramos--------------------------\\
+        String imageUriString = getIntent().getStringExtra("imageUri");
+        if (imageUriString != null) {
+            try {
+                Uri imageUri = Uri.parse(imageUriString);
+                ImageView imageView = findViewById(R.id.imageViewFotoDetalle);
+                imageView.setImageURI(imageUri);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
 
 
         //?------------Vinculamos el boton de ubicacion y le asignamos la busqueda refrente al titulo------------\\
