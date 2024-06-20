@@ -43,6 +43,7 @@ public class NoticiaAdaptador extends RecyclerView.Adapter<NoticiaAdaptador.View
 
     @Override
     public void onBindViewHolder(@NonNull NoticiaAdaptador.ViewHolder holder, @SuppressLint("RecyclerView") int position) {
+      
         holder.textViewTitulo.setText(lista.get(position).getTitulo());
         holder.textViewAutor.setText(lista.get(position).getAutor());
         holder.textViewLikes.setText(String.valueOf(lista.get(position).getLikes()));
